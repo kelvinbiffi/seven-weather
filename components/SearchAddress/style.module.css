@@ -1,10 +1,8 @@
 .wrapper {
+  position: relative;
   max-width: var(--max-width);
   margin: auto;
-  padding: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 24px;
 }
 
 .input {
@@ -14,4 +12,28 @@
   width: 100%;
   border-radius: 12px;
   border: 2px solid var(--color-black);
+}
+
+.addressList {
+  position: absolute;
+  background: var(--color-white);
+  list-style: none;
+  margin-top: -24px;
+  padding-top: 24px;
+  top: 100%;
+  z-index: 9;
+  border: 2px solid var(--color-black);
+  border-top: none;
+  width: 100%;
+  border-radius: 0 0 12px 12px;
+}
+
+.addressListItem {
+  padding: 12px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.typedAddress {
+
 }

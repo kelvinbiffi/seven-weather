@@ -13,9 +13,9 @@ const getAddresses = async (address, res) => {
       {
         method: 'GET',
       }
-    );
-    const data = await request.json();
-    return data.result.addressMatches;
+    )
+    const data = await request.json()
+    return data.result.addressMatches
   } catch (err) {
     res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
     return
@@ -37,9 +37,9 @@ const getHighLevelWeatherInfo = async (coordinates, res) => {
       {
         method: 'GET',
       }
-    );
-    const data = await request.json();
-    return data.properties;
+    )
+    const data = await request.json()
+    return data.properties
   } catch (err) {
     res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
     return
@@ -59,9 +59,9 @@ const getForecastInfo = async (forecastURL, res) => {
       {
         method: 'GET',
       }
-    );
-    const data = await request.json();
-    return data?.properties;
+    )
+    const data = await request.json()
+    return data?.properties
   } catch (err) {
     res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
     return
@@ -74,21 +74,21 @@ export default async function handler(req, res) {
     return
   }
 
-  const { address } = req.query;
+  const { address } = req.query
 
   if (!address) {
     res.status(402).send({ message: 'Addressinfo required' })
     return
   }
 
-  const addressMatches = await getAddresses(address, res);
+  const addressMatches = await getAddresses(address, res)
   
   if (!addressMatches?.length) {
     res.status(404).send({ message: 'Ops... We were not able to get the coordinates for this address info' })
     return
   }
 
-  const { coordinates } = addressMatches[0];
+  const { coordinates, matchedAddress } = addressMatches[0]
 
   const highLevelWeather = await getHighLevelWeatherInfo(coordinates, res)
 
@@ -99,20 +99,23 @@ export default async function handler(req, res) {
 
   const forecastInfo = await getForecastInfo(highLevelWeather?.forecast, res)
 
-  if (forecastInfo?.periods?.length === 0) {
+  if (!forecastInfo?.periods?.length) {
     res.status(404).send({ message: 'Ops... We were not able to get the forecast for this address' })
     return
   }
 
-  const forecast = {};
+  const forecast = {}
 
   forecastInfo.periods.forEach((period) => {
     const dateString = period.startTime.split('T')[0]
-    const forecastObject = forecast[dateString] ?? {};
+    const forecastObject = forecast[dateString] ?? {}
     const periodTime = period.isDaytime ? 'day' : 'night'
-    forecastObject[periodTime] = period;
+    forecastObject[periodTime] = period
     forecast[dateString] = forecastObject
-  });
+  })
 
-  res.status(200).json(forecast)
+  res.status(200).json({
+    address: matchedAddress,
+    forecast
+  })
 }
