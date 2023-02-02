@@ -46,6 +46,12 @@ const getHighLevelWeatherInfo = async (coordinates, res) => {
   }
 }
 
+/**
+ * 
+ * @param {forecastURL} forecastURL URL for get forecast provided by the weather API
+ * @param {Response} res HTTP Response Object
+ * @return Forecast for the next 7 days split in day and night
+ */
 const getForecastInfo = async (forecastURL, res) => {
   try {
     const request = await fetch(
