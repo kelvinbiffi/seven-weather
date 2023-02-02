@@ -1,0 +1,17 @@
+.wrapper {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid var(--color-black);
+}

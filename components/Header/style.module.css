@@ -1,0 +1,33 @@
+.header {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  border-radius: 12px;
+  margin-right: 24px;
+}
+
+.title {
+  font-size: 32px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    margin-right: 0;
+  }
+
+  .title {
+    font-size: 24px;
+    text-align: center;
+  }
+}
