@@ -18,24 +18,15 @@
   border: 2px solid var(--color-black);
 }
 
-.addressList {
+.clearButton {
   position: absolute;
-  background: var(--color-white);
-  list-style: none;
-  margin-top: -24px;
-  padding-top: 24px;
-  top: 100%;
-  z-index: 9;
-  border: 2px solid var(--color-black);
-  border-top: none;
-  width: 100%;
-  border-radius: 0 0 12px 12px;
-}
-
-.addressListItem {
-  padding: 12px;
-  font-weight: 400;
+  right: 0;
+  top: 0;
+  border: none;
+  padding: 28px 12px;
+  background-color: transparent;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .tipAddress {

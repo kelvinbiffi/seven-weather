@@ -1,3 +1,5 @@
+import { error } from "./helper"
+
 /**
  * Find the Address infos and coordinates based in the address string description
  * 
@@ -17,7 +19,7 @@ const getPossibleAddresses = async (address, res) => {
     const data = await request.json()
     return data.result.addressMatches
   } catch (err) {
-    res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
+    error(500, `Ops.. we got and error: ${err.message}`, res)
     return
   }
 }
@@ -31,16 +33,19 @@ export default async function handler(req, res) {
   const { address } = req.query
 
   if (!address) {
-    res.status(402).send({ message: 'Addressinfo required' })
+    error(402, 'address required', res)
     return
   }
 
   const results = await getPossibleAddresses(address, res)
   
   if (!results?.length) {
-    res.status(404).send({ message: 'Ops... We were not able to find an address with this address text' })
+    error(404, 'Ops... We were not able to find an address with this address text', res)
     return
   }
 
-  res.status(200).json(results.map(({coordinates, matchedAddress: address, tigerLine}) => ({ id: tigerLine.tigerLineId, coordinates, address })))
+  res.status(200).json({
+    code: 200,
+    results: results.map(({coordinates, matchedAddress: address, tigerLine}) => ({ id: tigerLine.tigerLineId, coordinates, address }))
+  })
 }

@@ -1,45 +1,53 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const useAutocomplete = (address) => {
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [possibleAddresses, setPossibleAddresses] = useState([])
+  const [possibleAddresses, setPossibleAddresses] = useState()
 
-  const findPossibleAddresses = async () => {
+  const findPossibleAddresses = useCallback(async () => {
+    setError(null);
     setIsLoading(true);
     try {
-      const results = await fetch(
+      const request = await fetch(
         `/api/autocomplete?address=${address}`,
         {
           method: 'GET',
         }
       )
-      const addresses = await results.json();
-      setPossibleAddresses(addresses)
+      const response = await request.json()
+      if (response.code === 200) {
+        setPossibleAddresses(response.results);
+      } else {
+        setError(response)
+      }
     } catch (e) {
       setError(e);
-      console.warn(`Error: `, e);
+      console.warn(`Error: `, e)
     } finally {
       setIsLoading(false);
     }
     
+  }, [address])
+
+  const clearTips = () => {
+    setPossibleAddresses([]);
   }
 
   useEffect(() => {
     const waitToAutoCompleteAddress = setTimeout(() => {
       if (address !== '') {
         findPossibleAddresses();
+      } else {
+        setError(null);
+        clearTips()
       }
     }, 1000)
 
     return () => {
       clearTimeout(waitToAutoCompleteAddress)
     }
-  }, [address])
-
-  const clearTips = () => {
-    setPossibleAddresses([]);
-  }
+  }, [address, findPossibleAddresses])
 
   return {
     error,

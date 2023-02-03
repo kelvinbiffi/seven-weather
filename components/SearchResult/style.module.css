@@ -1,0 +1,37 @@
+.searchResult {
+  position: absolute;
+  background: var(--color-white);
+  margin-top: 46px;
+  padding-top: 24px;
+  top: 0;
+  z-index: 9;
+  border: 2px solid var(--color-black);
+  border-top: none;
+  width: 100%;
+  border-radius: 0 0 12px 12px;
+}
+
+.addressList {
+  list-style: none;
+  width: 100%;
+}
+
+.addressListItem {
+  padding: 12px 24px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.addressListItem:hover {
+  background-color: var(--color-gray);
+}
+
+.message {
+  font-weight: 600;
+  padding: 12px 24px;
+}
+
+.error {
+  color: var(--color-red);
+}

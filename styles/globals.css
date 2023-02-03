@@ -6,6 +6,7 @@
   --color-white: #FFFFFF;
   --color-gray: #F2F2F2;
   --color-black: #333333;
+  --color-red: #ff4c4c;
 
   --background-color: var(--color-gray);
 }
