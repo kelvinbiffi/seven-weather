@@ -1,5 +1,5 @@
 /**
- * Find the Possible Addresses according address string description
+ * Find the Address infos and coordinates based in the address string description
  * 
  * @param {String} address address string description
  * @param {Response} res HTTP Response Object
@@ -9,13 +9,13 @@
 const getPossibleAddresses = async (address, res) => {
   try {
     const request = await fetch(
-      `https://api.geoapify.com/v1/geocode/autocomplete?text=${address},US&format=json&apiKey=${process.env.GEOAPIFY_API_KEY}`,
+      `https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=${address}&benchmark=2020&format=json`,
       {
         method: 'GET',
       }
     )
     const data = await request.json()
-    return data.results
+    return data.result.addressMatches
   } catch (err) {
     res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
     return
@@ -42,21 +42,5 @@ export default async function handler(req, res) {
     return
   }
 
-  res.status(200).json(results.map(({
-    place_id,
-    housenumber,
-    street,
-    city,
-    state,
-    state_code,
-    formatted
-  }) => ({
-    place_id,
-    housenumber,
-    street,
-    city,
-    state,
-    state_code,
-    formatted
-  })))
+  res.status(200).json(results.map(({coordinates, matchedAddress: address, tigerLine}) => ({ id: tigerLine.tigerLineId, coordinates, address })))
 }

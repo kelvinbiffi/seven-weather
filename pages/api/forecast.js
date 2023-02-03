@@ -1,28 +1,4 @@
 /**
- * Find the Address infos and coordinates based in the address string description
- * 
- * @param {String} address address string description
- * @param {Response} res HTTP Response Object
- * 
- * @return {Object} Address Info Object
- */
-const getAddresses = async (address, res) => {
-  try {
-    const request = await fetch(
-      `https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=${address}&benchmark=2020&format=json`,
-      {
-        method: 'GET',
-      }
-    )
-    const data = await request.json()
-    return data.result.addressMatches
-  } catch (err) {
-    res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
-    return
-  }
-}
-
-/**
  * Find the Address weather high level infos based in the coordinates
  * 
  * @param {{x: Float32Array, y: Float}} coordinates lat and long info
@@ -41,7 +17,7 @@ const getHighLevelWeatherInfo = async (coordinates, res) => {
     const data = await request.json()
     return data.properties
   } catch (err) {
-    res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
+    res.status(500).send({ message: `Ops.. we got an unexpected error: ${err.message}` })
     return
   }
 }
@@ -63,7 +39,7 @@ const getForecastInfo = async (forecastURL, res) => {
     const data = await request.json()
     return data?.properties
   } catch (err) {
-    res.status(500).send({ message: `Ops.. we got and error: ${err.message}` })
+    res.status(500).send({ message: `Ops.. we got an unexpected error: ${err.message}` })
     return
   }
 }

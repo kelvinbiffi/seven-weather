@@ -4,27 +4,27 @@ const ForecastContext = createContext()
 
 export const ForecastProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [address, setAddress] = useState('')
+  const [coordinates, setCoordinates] = useState('')
   const [forecast, setForecast] = useState()
 
   const getForecast = useCallback(() => {
-    console.log('GET FORECAST FOR', address)
-  }, [address])
+    console.log('GET FORECAST FOR', coordinates)
+  }, [coordinates])
 
   useEffect(() => {
-    if (address !== '') {
+    if (coordinates !== '') {
       getForecast()
     }
-  }, [address, getForecast])
+  }, [coordinates, getForecast])
 
-  const selectAddress = (address) => {
-    setAddress(address)
+  const selectCoordinates = (coords) => {
+    setCoordinates(coords)
   }
 
   return (
     <ForecastContext.Provider value={{
       forecast,
-      selectAddress,
+      selectCoordinates,
     }}>
       { children }
     </ForecastContext.Provider>
