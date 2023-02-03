@@ -1,6 +1,6 @@
 import { useState, useContext, useRef } from 'react'
 import ForecastContext from '@/context/Forecast'
-import useAutocomplete from '@/hooks/useAutocomplete'
+import useLookup from '@/hooks/useLookup'
 import { Roboto } from '@next/font/google'
 import dynamic from 'next/dynamic'
 import styles from './style.module.css'
@@ -12,7 +12,7 @@ const SearchResult = dynamic(() => import('../SearchResult'))
 export default function SearchAddress() {
   const { selectCoordinates } = useContext(ForecastContext)
   const [address, setAddress] = useState('')
-  const { possibleAddresses, clearTips, isLoading, error } = useAutocomplete(address)
+  const { possibleAddresses, clearTips, isLoading, error } = useLookup(address)
 
   const tipInput = useRef();
 

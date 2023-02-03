@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const useAutocomplete = (address) => {
+const useLookup = (address) => {
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
   const [possibleAddresses, setPossibleAddresses] = useState()
@@ -10,7 +10,7 @@ const useAutocomplete = (address) => {
     setIsLoading(true);
     try {
       const request = await fetch(
-        `/api/autocomplete?address=${address}`,
+        `/api/lookup?address=${address}`,
         {
           method: 'GET',
         }
@@ -57,4 +57,4 @@ const useAutocomplete = (address) => {
   }
 }
 
-export default useAutocomplete
+export default useLookup
