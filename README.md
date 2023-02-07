@@ -5,8 +5,12 @@ The idea of this web app is provide the 7 days forecast for a specific US aaddre
 API used for this demo
 - https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
 - https://www.weather.gov/documentation/services-web-api
-- https://apidocs.geoapify.com/
 
+
+## Install (Use node 16 or greater)
+```bash
+yarn
+```
 
 ## Development
 ```bash

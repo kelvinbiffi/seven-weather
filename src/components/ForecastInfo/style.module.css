@@ -1,0 +1,5 @@
+.forecastInfo {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 24px;
+}
