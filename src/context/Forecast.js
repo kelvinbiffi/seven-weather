@@ -5,7 +5,7 @@ const ForecastContext = createContext();
 
 export const ForecastProvider = ({ children }) => {
   const [coordinates, setCoordinates] = useState();
-  const { isLoading, error, forecast } = useForecast(coordinates);
+  const { isLoading, error, forecast, retry, clear } = useForecast(coordinates);
   const selectCoordinates = (coords) => {
     setCoordinates(coords);
   };
@@ -16,6 +16,8 @@ export const ForecastProvider = ({ children }) => {
         error,
         isLoading,
         forecast,
+        retry,
+        clear,
         selectCoordinates,
       }}
     >

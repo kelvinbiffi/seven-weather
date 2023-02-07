@@ -2,4 +2,7 @@
   max-width: var(--max-width);
   margin: auto;
   padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
 }

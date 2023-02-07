@@ -1,0 +1,67 @@
+.weatherCard {
+  width: 33%;
+  padding: 12px;
+}
+
+@media screen and (max-width: 968px) {
+  .weatherCard {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .weatherCard {
+    width: 100%;
+  }
+}
+
+.weatherContent {
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.1);
+  background-color: var(--color-white);
+  position: relative;
+  min-height: 100%;
+}
+
+.icon {
+  border-radius: 80px;
+}
+
+.toggleWrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px;
+}
+
+.name {
+  font-size: 20px;
+  text-align: right;
+}
+
+.temperature {
+  font-size: 44px;
+  text-align: right;
+  margin-bottom: 12px;
+}
+
+.unit {
+  font-size: 14px;
+}
+
+.dayInfo {
+  background: var(--color-white);
+}
+
+.dayInfo .name, .dayInfo .temperature, .dayInfo .detailed {
+  color: var(--color-black);
+}
+
+.nightInfo {
+  background: var(--color-black);
+}
+
+.nightInfo .name, .nightInfo .temperature, .nightInfo .detailed {
+  color: var(--color-gray);
+}

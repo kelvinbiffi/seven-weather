@@ -5,7 +5,7 @@ const useForecast = (coordinates) => {
   const [isLoading, setIsLoading] = useState(false);
   const [forecast, setForecast] = useState();
 
-  const findForecast = useCallback(async () => {
+  const fetchForecast = useCallback(async () => {
     setError(null);
     setIsLoading(true);
     try {
@@ -29,16 +29,26 @@ const useForecast = (coordinates) => {
     }
   }, [coordinates]);
 
+  const clear = () => {
+    setForecast(null);
+  };
+
+  const retry = () => {
+    fetchForecast();
+  };
+
   useEffect(() => {
     if (coordinates?.x && coordinates?.y) {
-      findForecast();
+      fetchForecast();
     }
-  }, [coordinates, findForecast]);
+  }, [coordinates, fetchForecast]);
 
   return {
     error,
     isLoading,
     forecast,
+    retry,
+    clear,
   };
 };
 

@@ -6,9 +6,10 @@ import ForecastContext from "@/context/Forecast";
 import dynamic from "next/dynamic";
 
 const ForecastInfo = dynamic(() => import("@/components/ForecastInfo"));
+const ErrorMessage = dynamic(() => import("@/components/ErrorMessage"));
 
 export default function Home() {
-  const { forecast, isLoading, error } = useContext(ForecastContext);
+  const { forecast, isLoading, error, retry } = useContext(ForecastContext);
   return (
     <>
       <Head>
@@ -27,7 +28,13 @@ export default function Home() {
         {!isLoading && !error && forecast && (
           <ForecastInfo forecast={forecast} />
         )}
-        {!isLoading && error && <h1>{error.message}</h1>}
+        {!isLoading && error && (
+          <ErrorMessage
+            message={error?.message}
+            ctaLabel="Retry"
+            ctaAction={retry}
+          />
+        )}
       </main>
     </>
   );

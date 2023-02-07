@@ -10,7 +10,7 @@ const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 const SearchResult = dynamic(() => import("../SearchResult"));
 
 export default function SearchAddress() {
-  const { selectCoordinates } = useContext(ForecastContext);
+  const { selectCoordinates, clear } = useContext(ForecastContext);
   const [address, setAddress] = useState("");
   const { possibleAddresses, clearTips, isLoading, error } = useLookup(address);
 
@@ -41,6 +41,7 @@ export default function SearchAddress() {
             type="button"
             onClick={() => {
               setAddress("");
+              clear();
             }}
           >
             clear
