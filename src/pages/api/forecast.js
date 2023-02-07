@@ -67,23 +67,19 @@ export default async function handler(req, res) {
   );
 
   if (!highLevelWeather?.forecast) {
-    res
-      .status(404)
-      .send({
-        message:
-          "Ops... We were not able to get the forecast for this address cooerdinates",
-      });
+    res.status(404).send({
+      message:
+        "Ops... We were not able to get the forecast for this address cooerdinates",
+    });
     return;
   }
 
   const forecastInfo = await getForecastInfo(highLevelWeather?.forecast, res);
 
   if (!forecastInfo?.periods?.length) {
-    res
-      .status(404)
-      .send({
-        message: "Ops... We were not able to get the forecast for this address",
-      });
+    res.status(404).send({
+      message: "Ops... We were not able to get the forecast for this address",
+    });
     return;
   }
 

@@ -15,9 +15,10 @@ const useLookup = (address) => {
       const response = await request.json();
       if (response.code === 200) {
         setPossibleAddresses(response.results);
-      } else {
-        setError(response);
+        return;
       }
+
+      setError(response);
     } catch (e) {
       setError(e);
       console.warn(`Error: `, e);
@@ -34,10 +35,11 @@ const useLookup = (address) => {
     const waitToAutoCompleteAddress = setTimeout(() => {
       if (address !== "") {
         findPossibleAddresses();
-      } else {
-        setError(null);
-        clearTips();
+        return;
       }
+
+      setError(null);
+      clearTips();
     }, 1000);
 
     return () => {

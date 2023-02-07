@@ -18,9 +18,10 @@ const useForecast = (coordinates) => {
       const response = await request.json();
       if (response.code === 200) {
         setForecast(response.forecast);
-      } else {
-        setError(response);
+        return;
       }
+
+      setError(response);
     } catch (e) {
       setError(e);
       console.warn(`Error: `, e);
